@@ -28,7 +28,9 @@ const TaskCompletedScreen = () => {
     );
     try {
       AsyncStorage.setItem('@task-list', JSON.stringify(deletedList));
-      setTasks(deletedList);
+      setTasks(
+        deletedList.filter((list, listIndex) => list.isCompleted === true)
+      );
     } catch (e) {
       console.log('Error delete task: in task-all.js');
       console.error(e.message);
