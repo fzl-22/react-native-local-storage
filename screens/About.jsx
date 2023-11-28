@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Linking } from 'react-native';
+import { View, Text, StyleSheet, Button, Linking, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const About = () => {
@@ -11,6 +11,24 @@ const About = () => {
       console.log('Error clear data: in about.js');
       console.error(e);
     }
+  };
+
+  const createClearDataAlert = () => {
+    Alert.alert(
+      'Menghapus Data',
+      'Apakah anda benar-benar ingin menghapus data anda?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          style: 'default',
+          onPress: handleClearData,
+        }
+      ]
+    );
   };
 
   return (
@@ -46,7 +64,7 @@ const About = () => {
       <Button
         style={{ marginTop: 15 }}
         title="Clear Data"
-        onPress={() => handleClearData()}
+        onPress={createClearDataAlert}
       ></Button>
     </View>
   );
